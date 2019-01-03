@@ -1,9 +1,12 @@
 const Promise = require("./index");
 
-let aPromise = new Promise((resolve, reject) => {
-  resolve("fulfilled");
-});
-aPromise
-  .then(value => {
-    console.log("resolve", value);
+Promise.deferred = function() {
+  let dfd = {};
+  dfd.promise = new Promise(function(resolve, reject) {
+    dfd.resolve = resolve;
+    dfd.reject = reject;
   });
+  return dfd;
+};
+
+module.exports = Promise;

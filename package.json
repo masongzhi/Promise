@@ -1,0 +1,25 @@
+{
+  "name": "promise",
+  "version": "1.0.0",
+  "description": "achieve a Promise 自己跟着写了一遍 Promise 的then、catch、all",
+  "main": "index.js",
+  "scripts": {
+    "test": "promises-aplus-tests test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masongzhi/Promise.git"
+  },
+  "keywords": [
+    "promise"
+  ],
+  "author": "masongzhi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/masongzhi/Promise/issues"
+  },
+  "homepage": "https://github.com/masongzhi/Promise#readme",
+  "devDependencies": {
+    "promises-aplus-tests": "^2.1.2"
+  }
+}
