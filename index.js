@@ -157,4 +157,49 @@ Promise.prototype.then = function(onFulfilled, onRejected) {
   }
 };
 
+Promise.resolve = function(value) {
+  return new Promise(function(resolve) {
+    resolve(value);
+  });
+};
+
+Promise.reject = function(reason) {
+  return new Promise(function(resolve, reject) {
+    reject(reason);
+  });
+};
+
+Promise.prototype.catch = function(onRejected) {
+  return this.then(null, onRejected)
+}
+
+/**
+ * Promise.all Promise进行并行处理
+ * 参数: promise对象组成的数组作为参数
+ * 返回值: 返回一个Promise实例
+ * 当这个数组里的所有promise对象全部变为resolve状态的时候，才会resolve。
+ */
+Promise.all = function(promises) {
+  return new Promise((resolve, reject) => {
+    let done = gen(promises.length, resolve);
+    promises.forEach((promise, index) => {
+      promise.then(value => {
+        done(index, value);
+      }, reject);
+    });
+  });
+};
+
+function gen(length, resolve) {
+  let count = 0;
+  let values = [];
+  return function(i, value) {
+    values[i] = value;
+    if (++count === length) {
+      // console.log(values);
+      resolve(values);
+    }
+  };
+}
+
 module.exports = Promise;
