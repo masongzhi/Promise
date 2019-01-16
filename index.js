@@ -158,6 +158,9 @@ Promise.prototype.then = function(onFulfilled, onRejected) {
 };
 
 Promise.resolve = function(value) {
+  if (value instanceof Promise) {
+    return value
+  }
   return new Promise(function(resolve) {
     resolve(value);
   });
