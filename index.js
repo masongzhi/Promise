@@ -159,7 +159,7 @@ Promise.prototype.then = function(onFulfilled, onRejected) {
 
 Promise.resolve = function(value) {
   if (value instanceof Promise) {
-    return value
+    return value;
   }
   return new Promise(function(resolve) {
     resolve(value);
@@ -173,8 +173,8 @@ Promise.reject = function(reason) {
 };
 
 Promise.prototype.catch = function(onRejected) {
-  return this.then(null, onRejected)
-}
+  return this.then(null, onRejected);
+};
 
 /**
  * Promise.all Promise进行并行处理
@@ -204,5 +204,18 @@ function gen(length, resolve) {
     }
   };
 }
+
+/**
+ * race 返回多个promise中最快返回的一个
+ * @param promises
+ * @returns {Promise}
+ */
+Promise.race = function(promises) {
+  return new Promise((resolve, reject) => {
+    promises.forEach(promise => {
+      promise.then(resolve, reject);
+    });
+  });
+};
 
 module.exports = Promise;
